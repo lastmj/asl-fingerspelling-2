@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
-    "sourceMap": true,
+    "target": "ES6",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": true,
     "noImplicitAny": true
   },
-  "files": [
-      "www/components/app/AppComponent.ts"
-  ]
+  "exclude": [
+      "node_modules",
+      "www/node_modules"
+  ],
+  "compileOnSave": false
 }

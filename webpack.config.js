@@ -1,40 +1,29 @@
-var path = require('path');
-var webpack = require('webpack');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-
 module.exports = {
-	devtool: 'source-map',
-	debug: true,
-	entry: {
-		'angular2': [
-				'rxjs',
-				'reflect-metadata',
-				'angular2/core',
-				'angular2/router',
-				'angular2/http'
-			],
-		'app-bundle': './www/boot.ts'
-	},
-	output: {
-		path: __dirname + 'www/public',
-		publicPath: 'public/',
-		filename: '[name].js',
-		sourceMapFilename: '[name].js.map',
-		chunkFilename: '[id].chunk.js'
-	},
-	resolve: {
-		extensions: ['', '.ts', '.js', '.json', '.css', '.html']
-	},
-	module: {
-		loaders: [
-			{
-				loader: 'ts',
-				exclude: [/node_modules/]
-			}
-		]
-	},
-	plugins: [
-		new CommonsChunkPlugin({ name: 'angular2', filename: 'angular2.js', minChunks: Infinity }),
-		new CommonsChunkPlugin({ name: 'common', filename: 'common.js' })
-	]
+    entry: {
+        'angular2': [
+            './www/node_modules/rxjs',
+            './www/node_modules/reflect-metadata',
+            './www/node_modules/angular2/core',
+            './www/node_modules/angular2/router',
+            './www/node_modules/angular2/http',
+            './www/node_modules/angular2/common'
+        ],
+        'app': './www/boot.ts'
+    },
+    output: {
+        path: './www/dist',
+        filename: '[name].dist.js'
+    },
+    /*resolve: {
+        extensions: ['', '.ts', '.webpack.js', '.web.js', '.js']
+    },*/
+    module: {
+        loaders: [
+            {
+                test: /\.ts$/,
+                loader: 'babel-loader?presets[]=es2015,presets[]=stage-3!ts',
+                exclude: [ /node_modules/ ]
+            }
+        ]
+    }
 };
